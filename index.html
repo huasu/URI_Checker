@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+
+  <title>Angular App Template</title>
+  <meta name="description" content="HTML content">
+  <meta name="huasu" content="author">
+
+  <!-- Boot Strap: http://getbootstrap.com/getting-started/#template -->
+  <link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap.min.css">
+  <!-- Optional theme -->
+<!--   <link rel="stylesheet" href="assets/bootstrap/dist/css/bootstrap-theme.min.css">   -->
+<link rel="stylesheet" href="css/simplex.min.css">
+
+  <!-- <link ref="stylesheet" href="css/styles.css?v=1.0"> -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+    <script src="bower_components/html5shiv/dist/html5shiv.min.js"></script>
+    <script src="bower_components/respond/dest/respond.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div id="ng" ng-app="urlCheckApp">
+    <div ng-controller="appCtrl">
+      <h1> URL Checker Page</h1>
+      <hr>
+        <search-url title="OMDB"></search-url>
+      <hr>
+      <app-footer></app-footer>
+    </div><!-- end appCtrl -->
+  </div> <!-- end ng-app -->
+
+  <!-- jQuery -->
+  <script src="assets/jquery/dist/jquery.min.js"></script>
+
+  <!-- Bootstrap js -->
+  <!-- // <script src="js/bootstrap.min.js"></script> -->
+  <script src="assets/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="assets/angular/angular.min.js"></script>
+  <script src="assets/angular-resource/angular-resource.min.js"></script>
+  <script src="assets/angular-route/angular-route.min.js"></script>
+
+  <script src="js/app-ng.js"></script>
+  <script src="js/directives/app-ng-directives.js"></script>
+  <script src="js/services/app-ng-services.js"></script>
+
+  <script>document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')</script>
+</body>
+</html>
+
+<!--
+-->

@@ -1,0 +1,32 @@
+body {
+  background-color: #BBCCEE;
+}
+
+
+/* phone */
+@media only screen 
+and (min-device-width : 320px) 
+and (max-device-width : 568px) {
+  body {
+    background-color: hsl(120,95%,98%);
+  }
+  .hide-mobile { visibility: hidden;}
+
+
+/*ipad partrait*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (orientation : portrait)
+and (-webkit-min-device-pixel-ratio: 1)  {
+    .hide-mobile { visibility: hidden;}
+}
+
+/*ipad landscape*/
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)
+and (orientation : landscape)
+and (-webkit-min-device-pixel-ratio: 1)  {
+    .hide-mobile { visibility: hidden;}
+}

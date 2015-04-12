@@ -1,0 +1,22 @@
+<section><!-- services -->
+  <h2>{{title}} </h2>
+
+  <!-- Query section -->
+  <p>Title: <input type="text" size="80" ng-model="movie" ng-enter="search()"></input></p>
+  <div class="btn-group" role="group">
+    <button type="button" aria-label="search" ng-click="search()">Search</button>
+    <button type="button" aria-label="toggle hide" ng-show="hideResults" ng-click="hideResults = !hideResults">Show Results</button>    
+    <button type="button" aria-label="toggle hide" ng-hide="hideResults || !searched" ng-click="hideResults = !hideResults">Hide Results</button>         
+  </div>
+  <!-- Query section (end) -->
+
+  <!-- Results after search -->
+  <div ng-show="searched">
+    <p>URL: {{urlDisplay}}</p>
+    <div ng-hide="hideResults">Data: 
+      <pre class="resultBox" >{{data | json}}</pre>
+    </div>
+  </div>
+  <!-- Results after search (end) -->
+
+</section>
