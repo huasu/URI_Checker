@@ -32,23 +32,33 @@ angular.module('urlCheckApp.directives',[])
       title: '@',
       url: '@',
     },
+
     templateUrl: 'templates/searchByQuery.html',
-    controller: function($scope, $element, omdbFactory){
+    controller: function($scope, $element, urlFactory){
       $scope.hideResults = false;
-      $scope.urlDisplay = '';
+      $scope.url = '';
       $scope.movie = '';
       $scope.searched = false;
+      $scope.baseurl = 'http://www.omdbapi.com/?';
+      $scope.type = 'JSONP';
+
+      $scope.updateURL = function(){
+        if ($scope.movie.length === 0) {
+          this.url = '';
+        }
+        var title = this.movie.split(' ').join('+');
+        this.url  = this.baseurl + 't=' + title + '&r=json&callback=JSON_CALLBACK';
+      };
 
       $scope.search = function(){
         if ($scope.movie.length == 0) {
           return null;
         }
         $scope.searched = true;
-        var now = new Date();
-        console.log("Search pressed: "+now);
-        omdbFactory.setTitle($scope.movie);
-        $scope.urlDisplay = omdbFactory.composeURL();
-        omdbFactory.callURL()
+        // var now = new Date();
+        // console.log("Search pressed: "+now);
+
+        urlFactory.callURL(this.url)
           .then(function(data){
             $scope.data = data
           }, function(data){
@@ -74,7 +84,7 @@ angular.module('urlCheckApp.directives',[])
       $scope.hideResults = false;
       $scope.searched = false;
       $scope.url = '';
-      $scope.urlDisplay = '';
+      $scope.finalUrl = '';
       $scope.methodsList = ['get', 'head', 'jsonp'];
       $scope.method = urlFactory.getMethod();
 
@@ -84,10 +94,10 @@ angular.module('urlCheckApp.directives',[])
       };
 
       $scope.updateURL = function(){
-        $scope.urlDisplay = $scope.url;
+        $scope.finalUrl = $scope.url;
         if ($scope.method == 'jsonp' && 
             $scope.url.indexOf("callback=JSON_CALLBACK") === -1){
-              $scope.urlDisplay = $scope.urlDisplay+"&callback=JSON_CALLBACK";
+              $scope.finalUrl = $scope.finalUrl+"&callback=JSON_CALLBACK";
         }
       };
 
@@ -100,7 +110,7 @@ angular.module('urlCheckApp.directives',[])
         // var now = new Date();
         // console.log("Search pressed: "+now);
 
-        urlFactory.callURL($scope.url)
+        urlFactory.callURL($scope.finalUrl)
           .then(function(data){
             $scope.data = data
           }, function(data){
