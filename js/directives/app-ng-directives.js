@@ -23,14 +23,14 @@ angular.module('urlCheckApp.directives',[])
     };
 })
 
-.directive('searchUrl', function(){
+.directive('searchQuery', function(){
   return {
     restrict: 'AE',
     scope: {
       title: '@',
       url: '@',
     },
-    templateUrl: 'templates/searchURL.html',
+    templateUrl: 'templates/searchByQuery.html',
     controller: function($scope, $element, omdbFactory){
       $scope.hideResults = false;
       $scope.urlDisplay = '';
@@ -47,6 +47,41 @@ angular.module('urlCheckApp.directives',[])
         omdbFactory.setTitle($scope.movie);
         $scope.urlDisplay = omdbFactory.composeURL();
         omdbFactory.callURL()
+          .then(function(data){
+            $scope.data = data
+          }, function(data){
+            alert(data)
+          })
+      }
+
+    }
+  }
+})
+
+.directive('searchUrl', function(){
+  return {
+    restrict: 'AE',
+    scope: {
+      title: '@',
+    },
+    templateUrl: 'templates/searchByURL.html',
+    controller: function($scope, $element, urlFactory){
+      $scope.hideResults = false;
+      $scope.searched = false;
+      $scope.url = '';
+      $scope.urlDisplay = '';
+
+      $scope.search = function(){
+        if ($scope.url.length == 0) {
+          return null;
+        }
+        $scope.searched = true;
+
+        var now = new Date();
+        console.log("Search pressed: "+now);
+
+        $scope.urlDisplay = $scope.url;
+        urlFactory.callURL($scope.url)
           .then(function(data){
             $scope.data = data
           }, function(data){

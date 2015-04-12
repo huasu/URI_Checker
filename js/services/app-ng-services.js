@@ -1,6 +1,26 @@
 "use strict"; 
 
 angular.module('urlCheckApp.services',[])
+
+.factory('urlFactory', function($http, $q){
+  var service = {};
+  var _method = 'JSONP';
+
+  service.callURL = function(_finalUrl){
+    var deferred = $q.defer();
+    $http({
+      method: _method,
+      url: _finalUrl
+    }).success(function(data){
+      deferred.resolve(data);
+    }).error(function(){
+      deferred.reject('There was an error')
+    })
+    return deferred.promise;
+  }
+  return service;
+})
+
 .factory('omdbFactory', function($http, $q){
   var service = {};
   var _baseurl = 'http://www.omdbapi.com/?';

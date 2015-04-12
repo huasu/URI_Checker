@@ -5,8 +5,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
 
-  <title>Angular App Template</title>
-  <meta name="description" content="HTML content">
+  <title>URL Checker</title>
+  <meta name="Interface for checking APIs" content="HTML content">
   <meta name="huasu" content="author">
 
   <!-- Boot Strap: http://getbootstrap.com/getting-started/#template -->
@@ -28,10 +28,14 @@
 <body>
   <div id="ng" ng-app="urlCheckApp">
     <div ng-controller="appCtrl">
-      <h1> URL Checker Page</h1>
+      <h1> URL Checker</h1>
+
       <hr>
-        <search-url title="OMDB"></search-url>
+      <search-url title="Generic"></search-url>
       <hr>
+      <search-query title="OMDB"></search-query>
+      <hr>
+      
       <app-footer></app-footer>
     </div><!-- end appCtrl -->
   </div> <!-- end ng-app -->
