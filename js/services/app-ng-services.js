@@ -4,8 +4,15 @@ angular.module('urlCheckApp.services',[])
 
 .factory('urlFactory', function($http, $q){
   var service = {};
-  var _method = 'JSONP';
+  var _method = 'jsonp';
 
+  service.setMethod = function(method){
+    _method = method;
+  }
+  service.getMethod = function(){
+    return _method;
+  }
+  
   service.callURL = function(_finalUrl){
     var deferred = $q.defer();
     $http({

@@ -22,8 +22,10 @@ angular.module('urlCheckApp.directives',[])
         });
     };
 })
-
-.directive('searchQuery', function(){
+/**
+ * Section for searching the Open Movie Database for movies
+ */
+.directive('searchOmdb', function(){
   return {
     restrict: 'AE',
     scope: {
@@ -57,7 +59,10 @@ angular.module('urlCheckApp.directives',[])
     }
   }
 })
-
+/**
+ * Generic retreival of URLs
+ * if the http method is jsonp, the callback will be added.
+ */
 .directive('searchUrl', function(){
   return {
     restrict: 'AE',
@@ -70,6 +75,21 @@ angular.module('urlCheckApp.directives',[])
       $scope.searched = false;
       $scope.url = '';
       $scope.urlDisplay = '';
+      $scope.methodsList = ['get', 'head', 'jsonp'];
+      $scope.method = urlFactory.getMethod();
+
+      $scope.updateMethod = function(){
+        urlFactory.setMethod($scope.method);
+        this.updateURL();
+      };
+
+      $scope.updateURL = function(){
+        $scope.urlDisplay = $scope.url;
+        if ($scope.method == 'jsonp' && 
+            $scope.url.indexOf("callback=JSON_CALLBACK") === -1){
+              $scope.urlDisplay = $scope.urlDisplay+"&callback=JSON_CALLBACK";
+        }
+      };
 
       $scope.search = function(){
         if ($scope.url.length == 0) {
@@ -77,10 +97,9 @@ angular.module('urlCheckApp.directives',[])
         }
         $scope.searched = true;
 
-        var now = new Date();
-        console.log("Search pressed: "+now);
+        // var now = new Date();
+        // console.log("Search pressed: "+now);
 
-        $scope.urlDisplay = $scope.url;
         urlFactory.callURL($scope.url)
           .then(function(data){
             $scope.data = data
