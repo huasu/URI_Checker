@@ -1,0 +1,27 @@
+<section><!-- services -->
+  <h2>{{title}} </h2>
+
+  <!-- Query section -->
+  <p>
+    URL: <input type="text" size="60" ng-model="url" ng-enter="search()" class="form-control form-control-inline" ng-change='updateURL()'></input>
+      <select ng-model="method" ng-change="updateMethod()" class="form-control form-control-inline">
+        <option ng-repeat="httpMethod in methodsList">{{httpMethod}}</option>
+      </select>
+  </p>
+  <div class="btn-group" role="group">
+    <button type="button" aria-label="search" ng-click="search()">Search</button>
+    <button type="button" aria-label="toggle hide" ng-show="hideResults" ng-click="hideResults = !hideResults">Show Results</button>    
+    <button type="button" aria-label="toggle hide" ng-hide="hideResults || !searched" ng-click="hideResults = !hideResults">Hide Results</button>         
+  </div>
+  <!-- Query section (end) -->
+
+  <!-- Results after search -->
+  <div >
+    <p>URL: <br>{{finalUrl}}</p>
+    <div ng-show="searched && !hideResults">Data: 
+      <pre class="resultBox" >{{data | json}}</pre>
+    </div>
+  </div>
+  <!-- Results after search (end) -->
+
+</section>
